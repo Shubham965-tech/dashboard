@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User"); 
 
 const router = express.Router();
-const JWT_SECRET = "NITT@123"; 
+const JWT_SECRET = process.env.JWT_SECRET; 
 
 
 router.post("/register", async (req, res) => {
@@ -15,7 +15,7 @@ router.post("/register", async (req, res) => {
   }
 
   try {
- 
+    
     const existingUser = await User.findOne({ username });
     if (existingUser) {
       return res.status(409).json({ error: "Username already exists." });
