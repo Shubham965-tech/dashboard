@@ -1,9 +1,9 @@
 const express = require("express");
 const connectMongoDb = require("./connection");
 const cors = require("cors"); 
-
 const app = express();
-const PORT = 3000;
+require("dotenv").config();
+const PORT=process.env.PORT;
 
 const authRouter = require('./routes/auth');
 const eventRouter = require('./routes/events');
@@ -20,7 +20,7 @@ app.use(cors());
 
 
 
-connectMongoDb("mongodb://127.0.0.1:27017/Project-1")
+connectMongoDb(process.env.connection_URL)
   .then(() => console.log("MongoDB connected successfully from index.js"))
   .catch(err => console.error("MongoDB connection failed from index.js:", err));
 
